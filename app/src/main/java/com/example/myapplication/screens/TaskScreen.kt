@@ -2,26 +2,33 @@ package com.example.myapplication.screens
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import java.lang.reflect.Modifier
+import com.example.myapplication.components.TaskAppTopBar
+import com.example.myapplication.view_models.TaskViewModel
 
 class TaskScreen {
 
     @Composable
     fun TaskScreen(viewModel: TaskViewModel) {
-        Scaffold() { paddingValues ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-            ) {
-                Text("Hello, world!")
-            }
+        /* our state doesn't toggle the dialog yet, but we'll come
+        back to this */
+        val deleteAllTasksDialog = remember {
+            mutableStateOf(false)
         }
-    }
+
+        Scaffold(
+            topBar = {
+                TaskAppTopBar(deleteAllTasksDialog)
+            }) { paddingValues ->
+            // ...
     // ...
     @Preview
     @Composable
